@@ -1,7 +1,8 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Text, View } from "react-native";
 
   export default function Index() {
+    const[result, setResult] = useState<any[]>([]);
     useEffect(()=>{
       console.log ("Entra entre en pantalla");
       getPokemons();
@@ -16,10 +17,13 @@ import { Text, View } from "react-native";
     console.log(response);
     const data = await response.json();
     console.log(data.results);
+    setResult(data.results);
   };                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
   return (
     <View>
-      <Text>Luna</Text>
+      {result.map((item)=>{
+        return <Text key={item.name}>{item.name}</Text>
+      })}
     </View>
   );
 }
